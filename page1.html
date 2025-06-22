@@ -1,0 +1,143 @@
+ <!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joyeux Anniversaire Freeman !</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #0f2027 0%, #2c5364 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Comic Sans MS', 'Orbitron', Arial, sans-serif;
+            color: #fff;
+            overflow: hidden;
+        }
+        .anniv-box {
+            background: rgba(0,0,0,0.7);
+            border-radius: 24px;
+            padding: 40px 32px;
+            box-shadow: 0 8px 32px 0 #00ffe7aa, 0 0 0 4px #ff00cc55 inset;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        h1 {
+            font-size: 2.5em;
+            color: #00ffe7;
+            margin-bottom: 0.2em;
+            text-shadow: 0 0 12px #00ffe7, 0 0 24px #ff00cc;
+        }
+        h2 {
+            font-size: 1.5em;
+            color: #ff00cc;
+            margin-bottom: 1em;
+            text-shadow: 0 0 8px #ff00cc, 0 0 16px #00ffe7;
+        }
+        .cake {
+            font-size: 4em;
+            margin-bottom: 0.5em;
+            animation: bounce 1.2s infinite alternate;
+        }
+        @keyframes bounce {
+            0% { transform: translateY(0);}
+            100% { transform: translateY(-18px);}
+        }
+        .confetti {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .btn-fun {
+            margin-top: 2em;
+            padding: 12px 28px;
+            font-size: 1.1em;
+            border: none;
+            border-radius: 8px;
+            background: linear-gradient(90deg, #ff00cc 0%, #00ffe7 100%);
+            color: #232526;
+            font-family: 'Orbitron', Arial, sans-serif;
+            font-weight: bold;
+            letter-spacing: 2px;
+            cursor: pointer;
+            box-shadow: 0 0 16px 2px #00ffe7;
+            transition: background 0.2s, color 0.2s, transform 0.2s;
+        }
+        .btn-fun:hover {
+            background: linear-gradient(90deg, #00ffe7 0%, #ff00cc 100%);
+            color: #fff;
+            transform: scale(1.07) rotate(-2deg);
+        }
+    </style>
+</head>
+<body>
+    <canvas class="confetti"></canvas>
+    <div class="anniv-box">
+        <div class="cake">🎂</div>
+        <h1>Joyeux Anniversaire Freeman !</h1>
+        <h2>Que cette journée soit pleine de fun, de gâteaux et de surprises !</h2>
+        <p>On te souhaite tout le bonheur du monde et plein de succès pour cette nouvelle année !</p>
+        <button class="btn-fun" onclick="playSoundAndParty()">Clique ici pour la fête ! 🎉</button>
+    </div>
+    <audio id="partySound" src="https://cdn.pixabay.com/audio/2022/07/26/audio_124bfae5b6.mp3"></audio>
+    <script>
+        // Confetti animation
+        const canvas = document.querySelector('.confetti');
+        const ctx = canvas.getContext('2d');
+        let W = window.innerWidth, H = window.innerHeight;
+        canvas.width = W; canvas.height = H;
+        let confettis = [];
+        for(let i=0;i<120;i++){
+            confettis.push({
+                x: Math.random()*W,
+                y: Math.random()*H,
+                r: Math.random()*8+4,
+                d: Math.random()*120,
+                color: `hsl(${Math.random()*360},100%,60%)`,
+                tilt: Math.random()*20-10,
+                tiltAngle: 0,
+                tiltAngleIncremental: (Math.random()*0.07)+.05
+            });
+        }
+        function drawConfetti(){
+            ctx.clearRect(0,0,W,H);
+            confettis.forEach(c=>{
+                ctx.beginPath();
+                ctx.lineWidth = c.r;
+                ctx.strokeStyle = c.color;
+                ctx.moveTo(c.x + c.tilt + c.r/3, c.y);
+                ctx.lineTo(c.x + c.tilt, c.y + c.tilt + c.r/3);
+                ctx.stroke();
+            });
+            updateConfetti();
+        }
+        function updateConfetti(){
+            confettis.forEach(c=>{
+                c.y += Math.cos(c.d) + 1 + c.r/2;
+                c.x += Math.sin(0.01 * c.d);
+                c.tiltAngle += c.tiltAngleIncremental;
+                c.tilt = Math.sin(c.tiltAngle - (c.d/3)) * 15;
+                if(c.y > H){
+                    c.x = Math.random()*W;
+                    c.y = -10;
+                }
+            });
+        }
+        setInterval(drawConfetti, 20);
+        window.addEventListener('resize', ()=>{
+            W = window.innerWidth; H = window.innerHeight;
+            canvas.width = W; canvas.height = H;
+        });
+
+        // Fun button
+        function playSoundAndParty() {
+            document.getElementById('partySound').play();
+            alert("FREEMAN, c'est TA journée ! 🎉🎂🥳 PROFITE AU MAX");
+        }
+    </script>
+</body>
+</html>

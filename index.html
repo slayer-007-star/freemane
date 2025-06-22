@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #232526 0%, #414345 100%);
+            font-family: 'Orbitron', Arial, sans-serif;
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        form {
+            background: rgba(30, 30, 40, 0.95);
+            border-radius: 18px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37), 0 0 0 2px #00ffe7 inset;
+            padding: 40px 32px;
+            width: 340px;
+            border: 1px solid rgba(255,255,255,0.18);
+            margin-bottom: 32px;
+            position: relative;
+            z-index: 2;
+        }
+        form::before {
+            content: '';
+            position: absolute;
+            inset: -8px;
+            border-radius: 22px;
+            background: linear-gradient(120deg, #00ffe7 0%, #0072ff 100%);
+            opacity: 0.15;
+            z-index: -1;
+            filter: blur(8px);
+        }
+        label {
+            font-size: 1.1em;
+            letter-spacing: 1px;
+            color: #00ffe7;
+            text-shadow: 0 0 4px #00ffe788;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 10px 12px;
+            margin-top: 6px;
+            margin-bottom: 18px;
+            border: none;
+            border-radius: 8px;
+            background: #232526;
+            color: #fff;
+            font-size: 1em;
+            outline: none;
+            transition: box-shadow 0.2s, background 0.2s;
+            box-shadow: 0 0 0 1.5px #00ffe7;
+        }
+        input:focus, textarea:focus {
+            box-shadow: 0 0 12px 2px #00ffe7, 0 0 0 2px #0072ff inset;
+            background: #2b2e38;
+        }
+        button {
+            width: 100%;
+            padding: 12px 0;
+            border: none;
+            border-radius: 8px;
+            background: linear-gradient(90deg, #00ffe7 0%, #0072ff 100%);
+            color: #232526;
+            font-size: 1.2em;
+            font-family: 'Orbitron', Arial, sans-serif;
+            font-weight: bold;
+            letter-spacing: 2px;
+            cursor: pointer;
+            box-shadow: 0 4px 16px 0 rgba(0,255,231,0.15);
+            transition: background 0.3s, color 0.3s, transform 0.2s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        button.futuristic-glow {
+            box-shadow: 0 0 18px 4px #00ffe7, 0 0 40px 8px #0072ff inset;
+            color: #fff;
+            background: linear-gradient(90deg, #0072ff 0%, #00ffe7 100%);
+            transform: scale(1.05);
+        }
+        button::after {
+            content: '';
+            display: block;
+            position: absolute;
+            left: -75%;
+            top: 0;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(120deg, rgba(255,255,255,0.2) 0%, rgba(0,255,231,0.1) 100%);
+            transform: skewX(-20deg);
+            transition: left 0.4s;
+        }
+        button:hover::after {
+            left: 120%;
+        }
+        ul {
+            margin-top: 24px;
+            padding: 0;
+            list-style: none;
+            display: flex;
+            gap: 24px;
+            justify-content: center;
+            background: rgba(30, 30, 40, 0.85);
+            border-radius: 14px;
+            box-shadow: 0 2px 16px 0 rgba(0,255,231,0.08);
+            padding: 18px 32px;
+        }
+        ul li {
+            margin: 0;
+        }
+        ul li a {
+            color: #00ffe7;
+            text-decoration: none;
+            font-size: 1.08em;
+            font-family: 'Orbitron', Arial, sans-serif;
+            padding: 8px 18px;
+            border-radius: 8px;
+            background: linear-gradient(90deg, #232526 60%, #0072ff22 100%);
+            box-shadow: 0 0 8px 0 #00ffe755;
+            transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+            position: relative;
+        }
+        ul li a:hover, ul li a:focus {
+            background: linear-gradient(90deg, #00ffe7 0%, #0072ff 100%);
+            color: #232526;
+            box-shadow: 0 0 16px 2px #00ffe7, 0 0 24px 4px #0072ff inset;
+        }
+        @media (max-width: 500px) {
+            form {
+                width: 95vw;
+                padding: 18px 6vw;
+            }
+            ul {
+                flex-direction: column;
+                gap: 10px;
+                padding: 10px 8px;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css?family=Orbitron:500,700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <form action="#" method="post">
+        <label for="nom">Nom :</label>
+        <input type="text" id="nom" name="nom" required><br><br>
+
+        <label for="email">Email :</label>
+        <input type="email" id="email" name="email" required><br><br>
+
+        <label for="message">Message :</label><br>
+        <textarea id="message" name="message" rows="4" cols="30" required></textarea><br><br>
+
+        <button type="submit" id="envoyerBtn">Envoyer</button>
+    </form>
+    <ul>
+        <li>
+            <a href="page1.html" alt="bienvenus">La première page</a>
+        </li>
+        <li>
+           <a href="page2.html" alt="bienvenus">Voir la deuxième page</a>
+        </li>
+        <li>
+            <a href="page3.html" alt="bienvenus">Voir la troisième page</a>
+        </li>
+    </ul> 
+    <script>
+        // Animation futuriste sur le bouton lors du survol
+        const btn = document.getElementById('envoyerBtn');
+        if (btn) {
+            btn.addEventListener('mouseenter', () => {
+                btn.classList.add('futuristic-glow');
+            });
+            btn.addEventListener('mouseleave', () => {
+                btn.classList.remove('futuristic-glow');
+            });
+        }
+    </script>
+</body>
+</html>
